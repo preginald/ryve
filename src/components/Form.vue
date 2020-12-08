@@ -253,8 +253,13 @@ export default {
   computed: {},
   watch: {
     form: function () {
-      if (!this.form) {
+      if (!this.form && !this.buttons) {
         this.buttons = true;
+      }
+    },
+    buttons: function () {
+      if (!this.buttons && !this.form) {
+        this.form = true;
       }
     },
     tv_size_toggle: function (val) {
