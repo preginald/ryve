@@ -9,6 +9,12 @@
         transition="scale-transition"
         width="100"
       />
+      <v-btn text>
+        <router-link to="/">Home</router-link>
+      </v-btn>
+      <v-btn text>
+        <router-link to="/about">About</router-link>
+      </v-btn>
       <v-spacer></v-spacer>
       <v-switch
         v-model="$vuetify.theme.dark"
@@ -18,6 +24,7 @@
     </v-app-bar>
 
     <v-main>
+      <router-view></router-view>
       <Form />
     </v-main>
   </v-app>
