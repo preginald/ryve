@@ -9,6 +9,7 @@
         transition="scale-transition"
         width="100"
       />
+      <v-spacer></v-spacer>
       <v-btn text to="/">Home</v-btn>
       <v-btn text to="/test">Test</v-btn>
       <v-btn text to="/about">About</v-btn>
@@ -23,6 +24,16 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <v-footer>
+      <v-col class="text-right" cols="2"> </v-col>
+      <v-col class="text-center" cols="8">
+        {{ new Date().getFullYear() }} —
+        <strong>Peter Reginald for RYVE</strong>
+      </v-col>
+      <v-col class="text-right" cols="2">
+        <a href="https://github.com/preginald/ryve">Code</a>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 
