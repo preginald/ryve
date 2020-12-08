@@ -25,20 +25,15 @@
 
     <v-main>
       <router-view></router-view>
-      <Form />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Form from "./components/Form";
-
 export default {
   name: "App",
 
-  components: {
-    Form,
-  },
+  components: {},
 
   data: () => ({
     //
