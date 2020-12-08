@@ -13,6 +13,9 @@
         <router-link to="/">Home</router-link>
       </v-btn>
       <v-btn text>
+        <router-link to="/test">Test</router-link>
+      </v-btn>
+      <v-btn text>
         <router-link to="/about">About</router-link>
       </v-btn>
       <v-spacer></v-spacer>
