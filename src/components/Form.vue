@@ -1,9 +1,6 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="2" v-if="debug">
-        <v-switch label="debug" v-model="debug"></v-switch>
-      </v-col>
       <v-col cols="12" md="2">
         <v-switch label="form" v-model="form"></v-switch>
       </v-col>
@@ -170,67 +167,20 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">Live Quote</h2>
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">Code</th>
-                <th class="text-left">Type</th>
-                <th class="text-left">Item</th>
-                <th class="text-right">Qty</th>
-                <th class="text-right">$</th>
-                <th class="text-right">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in items" :key="item.name">
-                <td>{{ item.code }}</td>
-                <td>
-                  <v-chip
-                    small
-                    label
-                    text-color="white"
-                    :color="chipColour(item.type)"
-                    >{{ item.type }}</v-chip
-                  >
-                </td>
-                <td>{{ item.name }}</td>
-                <td class="text-right">{{ item.qty }}</td>
-                <td class="text-right">{{ item.price }}</td>
-                <td class="text-right">{{ item.lineTotal }}</td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-col>
-    </v-row>
-    <v-row v-if="debug">
-      <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">Debug</h2>
-
-        <ul>
-          <li>TV size:{{ tvsize }}</li>
-          <li>Mount surface:{{ mount_surface }}</li>
-          <li>Mount type:{{ mount_type }}</li>
-          <li>Mount recessed:{{ mount_recessed }}</li>
-          <li>Conceal wires:{{ conceal_wires }}</li>
-          <li>Concealable cables:{{ concealableCables }}</li>
-        </ul>
-      </v-col>
-    </v-row>
+    <Preview :items="items" />
   </v-container>
 </template>
 
 <script>
+import Preview from "./Preview.vue";
+
 export default {
   name: "Form",
-
+  components: {
+    Preview,
+  },
   data: () => ({
     heading: "TV Installation",
-    debug: false,
     form: true,
     buttons: false,
     labour: 100,
@@ -249,6 +199,7 @@ export default {
     datapoints: 0,
     objIndex: 0,
     items: [],
+    debug: {},
   }),
   computed: {},
   watch: {
@@ -485,18 +436,6 @@ export default {
       this.removeLineItem("concealcables");
       this.removeLineItem("concealconduit");
       this.removeLineItem("hdmicable");
-    },
-    chipColour(type) {
-      let colour = "blue";
-      switch (type) {
-        case "labour":
-          colour = "blue";
-          break;
-        case "item":
-          colour = "purple";
-          break;
-      }
-      return colour;
     },
     toggleButton(option) {
       switch (option) {
