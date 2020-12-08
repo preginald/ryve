@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="2">
+      <v-col cols="12" md="2" v-if="debug">
         <v-switch label="debug" v-model="debug"></v-switch>
       </v-col>
       <v-col cols="12" md="2">
@@ -41,9 +41,9 @@
               <v-row v-if="buttons">
                 <v-col cols="12" md="12">
                   <v-btn-toggle mandatory v-model="tv_size_toggle">
-                    <v-btn color="success">Medium</v-btn>
-                    <v-btn color="success">Large</v-btn>
-                    <v-btn color="success">X-Large</v-btn>
+                    <v-btn color="primary">Medium</v-btn>
+                    <v-btn color="primary">Large</v-btn>
+                    <v-btn color="primary">X-Large</v-btn>
                   </v-btn-toggle>
                 </v-col>
               </v-row>
@@ -66,9 +66,9 @@
               <v-row v-if="buttons">
                 <v-col cols="12" md="12">
                   <v-btn-toggle mandatory v-model="mount_type_toggle">
-                    <v-btn color="success">None</v-btn>
-                    <v-btn color="success">Stand</v-btn>
-                    <v-btn color="success">Wall</v-btn>
+                    <v-btn color="primary">None</v-btn>
+                    <v-btn color="primary">Stand</v-btn>
+                    <v-btn color="primary">Wall</v-btn>
                   </v-btn-toggle>
                 </v-col>
               </v-row>
@@ -90,9 +90,9 @@
               <v-row v-if="buttons">
                 <v-col cols="12" md="12">
                   <v-btn-toggle mandatory v-model="mount_surface_toggle">
-                    <v-btn color="success">Plaster</v-btn>
-                    <v-btn color="success">Brick</v-btn>
-                    <v-btn color="success">Concrete</v-btn>
+                    <v-btn color="primary">Plaster</v-btn>
+                    <v-btn color="primary">Brick</v-btn>
+                    <v-btn color="primary">Concrete</v-btn>
                   </v-btn-toggle>
                 </v-col>
               </v-row>
@@ -136,31 +136,31 @@
                 </v-col>
               </v-row>
               <v-row v-if="buttons">
-                <v-col>
+                <v-col v-if="mount_surface == 'plaster'">
                   <v-btn
                     @click="toggleButton('mount_recessed')"
-                    :color="mount_recessed ? 'success' : 'grey'"
+                    :color="mount_recessed ? 'primary' : 'grey'"
                     >Recessed</v-btn
                   >
                 </v-col>
                 <v-col>
                   <v-btn
                     @click="toggleButton('mount_fireplace')"
-                    :color="mount_fireplace ? 'success' : 'grey'"
+                    :color="mount_fireplace ? 'primary' : 'grey'"
                     >Above fireplace</v-btn
                   >
                 </v-col>
                 <v-col>
                   <v-btn
                     @click="toggleButton('conceal_cables')"
-                    :color="conceal_cables ? 'success' : 'grey'"
+                    :color="conceal_cables ? 'primary' : 'grey'"
                     >Conceal cables</v-btn
                   >
                 </v-col>
                 <v-col>
                   <v-btn
                     @click="toggleButton('mount_supplied')"
-                    :color="mount_supplied ? 'success' : 'grey'"
+                    :color="mount_supplied ? 'primary' : 'grey'"
                     >BYO mount</v-btn
                   >
                 </v-col>
@@ -252,6 +252,11 @@ export default {
   }),
   computed: {},
   watch: {
+    form: function () {
+      if (!this.form) {
+        this.buttons = true;
+      }
+    },
     tv_size_toggle: function (val) {
       switch (val) {
         case 0:
