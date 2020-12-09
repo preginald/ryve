@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app dense>
       <v-img
         alt="Ryve Logo"
         class="shrink mr-2"
@@ -44,7 +44,7 @@ export default {
   components: {},
 
   data: () => ({
-    //
+    collapseOnScroll: true,
   }),
 };
 </script>
